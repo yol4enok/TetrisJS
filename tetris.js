@@ -33,6 +33,18 @@ step();*/
 
 var canvas, context, currentX, currentY;
 
+var prevTime;
+var curTime;
+var color = {
+	r:0,
+	g:0,
+	b:0
+};
+
+function rgbToHex(r, g, b) {
+    return "#" + ((1 << 24) + (parseInt(r) << 16) + (parseInt(g) << 8) + parseInt(b)).toString(16).slice(1);
+}
+
 init();
 animate();
 
@@ -49,6 +61,7 @@ function init() {
 
     context.fillStyle = '#000000';
     context.fillRect( 0, 0, 255, 255 );
+	prevTime = curTime = 0;
 }
 
 function animate() {
@@ -57,26 +70,34 @@ function animate() {
 }
 
 function draw() {
+    curTime = new Date().getTime();
+	var dt = curTime - prevTime;
+    if(dt >= 16) {
+		if (currentX < canvas.width - 1) {
+		  currentX++;
+		}
 
-    if (currentX < canvas.width - 1) {
-      currentX++;
+		if (currentY < canvas.height - 1) {
+		  currentY++;
+		}
+		color.r += 0.01 * dt;
+		color.g += 0.01 * dt;
+		color.b += 0.01 * dt;
+		if(color.r > 255) {
+			color.r = color.g = color.b = 0;
+		}
+		context.fillStyle = rgbToHex(color.r, color.g, color.b);
+		context.fillRect( 0, 0, canvas.width, canvas.height );
+		
+/* 		if (currentX === canvas.width - 1 && currentY === canvas.height -1 ) {
+		  currentX = 0;
+		  currentY = 0;
+		  
+		  context.fillStyle = '#000000';
+		  context.fillRect( 0, 0, 255, 255 );
+		} */
+		prevTime = curTime;
     }
-
-    if (currentY < canvas.height - 1) {
-      currentY++;
-    }
-
-    context.fillStyle = '#FFFFFF';
-    context.fillRect( 0, 0, currentX, currentY );
-
-    if (currentX === canvas.width - 1 && currentY === canvas.height -1 ) {
-      currentX = 0;
-      currentY = 0;
-      
-      context.fillStyle = '#000000';
-      context.fillRect( 0, 0, 255, 255 );
-    }
-
 
     /*var time = new Date().getTime() * 0.002;
     var x = Math.sin( time ) *128;
