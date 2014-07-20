@@ -62,7 +62,7 @@ function init() {
     context.fillRect( 0, 0, 255, 255 );
 	  prevTime = curTime = 0;
 
-    var grid = new gameGrid(canvas.width, canvas.height, 16, 16);
+    grid = new gameGrid(canvas.width, canvas.height, 16, 16);
    // matrix[1][1] = 1;
    console.log(grid);
 }
@@ -73,6 +73,7 @@ function animate() {
 }
 
 function draw() {
+  console.log(grid.canvH);
     curTime = new Date().getTime();
 	var dt = curTime - prevTime;
     if(dt >= 16) {
