@@ -31,7 +31,7 @@ step();*/
   
 
 
-var canvas, context, currentX, currentY;
+var canvas, context, currentX, currentY, grid;
 
 var prevTime;
 var curTime;
@@ -55,13 +55,16 @@ function init() {
     canvas.height = 256;
 
     context = canvas.getContext( '2d' );
-
     currentX = 0;
     currentY = 0;
 
     context.fillStyle = '#000000';
     context.fillRect( 0, 0, 255, 255 );
-	prevTime = curTime = 0;
+	  prevTime = curTime = 0;
+
+    var grid = new gameGrid(canvas.width, canvas.height, 16, 16);
+   // matrix[1][1] = 1;
+   console.log(grid);
 }
 
 function animate() {
@@ -125,10 +128,30 @@ function draw() {
 
 }
 
+   function gameGrid (canvW,canvH,cellwidth,cellheight){
+    this.canvW = canvW;
+    this.canvH = canvH;
+     this.cellW = cellwidth;
+    this.cellH = cellheight;
+    this.gridWidth = canvW/cellwidth;
+    this.gridHeight = canvH/cellheight;
+    matrix=[];
+    for  (var i=0; i<this.gridWidth; ++i){
+      matrix[i]=[];
+      for (var j=0; j<this.gridHeight; ++j){
+        matrix[i][j]=0;
+
+      }
+    }
+    this.matrix = matrix;
+  }
+  
   })
 
- 
 
+
+
+   
 
  
 
