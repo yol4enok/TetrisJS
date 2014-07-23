@@ -151,13 +151,14 @@ function draw() {
 
    function Shape (positionX, positionY, cellwidth, cellheight, width, height, matrixPattern){
 
-		this.positionY = posY;
-		this.positionX = posX;
-		this.cellwidth = cellW;
-		this.cellheight =cellH;
-		var matrix  = [];
-		for (var i=0; i<width/cellW;++i){
-			for (var j=0; j<height/cellH;++j){
+		this.positionY = positionY;
+		this.positionX = positionX;
+		this.cellwidth = cellwidth;
+		this.cellheight =cellheight;
+
+		var matrix  = matrixPattern[0].length;
+		for (var i=0; i<matrix;++i){
+			for (var j=0; j<matrix;++j){
 		 		matrix[i][j] = matrixPattern[i][j];
 		 	}
 		}
@@ -168,3 +169,6 @@ function draw() {
   //Shape(posX, posY, cellW, cellH, matrixPattern)
   //var shape = new Shape(0,0,grid.)
 
+  
+    }
+  }
