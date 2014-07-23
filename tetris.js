@@ -46,7 +46,7 @@ function init() {
 	grid = new gameGrid(canvas.width, canvas.height, 16, 16);
 	var patternShapes =[ [1, 1,1],[1,1,1],[1,1,1] ];
   
-	shape = new Shape(0, 8, grid.cellW, grid.cellH, grid.gridWidth, grid.gridHeight, patternShapes);
+	shape = new Shape(0, 8, grid.cellW, grid.cellH,  patternShapes);
 	//matrix[1][1] = 1;
 	console.log(grid);
 }
@@ -149,22 +149,22 @@ function draw() {
 
   }
 
-   function Shape (positionX, positionY, cellwidth, cellheight, width, height, matrixPattern){
+   function Shape (positionX, positionY, cellwidth, cellheight, matrixPattern){
 
 		this.positionY = positionY;
 		this.positionX = positionX;
 		this.cellwidth = cellwidth;
 		this.cellheight =cellheight;
-		this.width = width;
-		this.height = height;
 		var len  = matrixPattern[0].length;
+		this.width = len;
+		this.height = len ;
 		for (var i=0; i<len;++i){
 			matrix[i]=[];
 			for (var j=0; j<len;++j){
 		 		matrix[i][j] = matrixPattern[i][j];
 		 	}
 		}
-				this.matix = matrix;
+				this.matrix = matrix;
 
    }
 });
