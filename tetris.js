@@ -77,7 +77,7 @@ function draw() {
 	context.fillStyle = rgbToHex(color.r, color.g, color.b);
 	context.fillRect( 0, 0, canvas.width, canvas.height );*/
 	
-	drawobject(positionX, positionY,gridWidth,gridHeight,cellW, cellH, matrix);
+	drawobject(shape.positionX, shape.positionY,shape.width,shape.height,shape.cellwidth, shape.cellheight, shape.matrix);
 	
 /*    if (currentX === canvas.width - 1 && currentY === canvas.height -1 ) {
 		  currentX = 0;
@@ -137,8 +137,8 @@ function draw() {
 	for (var i=0; i<gridWidth;++i){
 	  for (var j=0; j<gridHeight;++j){
 		if (matrix[i][j] == 1) {
-		  var x = positionX + i*cellW;
-		  var y = positionY + j*cellH;
+		  var x = (positionX + i)*cellW;
+		  var y = (positionY + j)*cellH;
 		  context.fillStyle ='#ff3df0';
 		  context.fillRect(x,y,cellW, cellH);
 
@@ -168,9 +168,8 @@ function draw() {
 
    }
 });
-  //Shape(posX, posY, cellW, cellH, matrixPattern)
-  //var shape = new Shape(0,0,grid.)
+
 
   
-    }
-  }
+  
+  
