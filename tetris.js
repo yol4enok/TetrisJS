@@ -1,23 +1,4 @@
    jQuery(document).ready(function() {
-  /*var canvas = document.getElementById("example");
-	ctx     = canvas.getContext('2d');
-	
-	ctx.fillRect(0, 0, example.width, example.height);
-	
-	jQuery(ctx).animate({color : "#FFFFFF"}, 1000);
-	//ctx.fillRect(1, 1, example.width, example.height);
-	/*function step(x,y) {
-  requestAnimationFrame(step);
-  for (x=0 , x =< example.width,++x){
-	for (y=0, y=< example.height,++y){
-	  ctx.fillstyle()
-	}
-  }
-}
-step();*/
-
-  //})
-// requestAnim shim layer by Paul Irish
 	window.requestAnimFrame = (function(){
 	  return  window.requestAnimationFrame       || 
 			  window.webkitRequestAnimationFrame || 
@@ -31,7 +12,7 @@ step();*/
   
 
 
-var canvas, context, currentX, currentY, grid, matrix;
+var canvas, context, currentX, currentY, grid, matrix,shape;
 
 var prevTime;
 var curTime;
@@ -63,7 +44,10 @@ function init() {
 	  prevTime = curTime = 0;
 
 	grid = new gameGrid(canvas.width, canvas.height, 16, 16);
-	matrix[1][1] = 1;
+	var patternShapes =[ [1, 1,1],[1,1,1],[1,1,1] ];
+  
+	shape = new Shape(0, 8, grid.cellW, grid.cellH, grid.gridWidth, grid.gridHeight, patternShapes);
+	//matrix[1][1] = 1;
 	console.log(grid);
 }
 
@@ -93,7 +77,7 @@ function draw() {
 	context.fillStyle = rgbToHex(color.r, color.g, color.b);
 	context.fillRect( 0, 0, canvas.width, canvas.height );*/
 	
-	drawobject(grid.gridWidth,grid.gridHeight,grid.cellW, grid.cellH);
+	drawobject(positionX, positionY,gridWidth,gridHeight,cellW, cellH, matrix);
 	
 /*    if (currentX === canvas.width - 1 && currentY === canvas.height -1 ) {
 		  currentX = 0;
@@ -148,12 +132,13 @@ function draw() {
 		this.matrix = matrix;
 	}
 
-  function drawobject (gridWidth,gridHeight,cellW, cellH){
+
+  function drawobject (positionX, positionY,gridWidth,gridHeight,cellW, cellH, matrix){
 	for (var i=0; i<gridWidth;++i){
 	  for (var j=0; j<gridHeight;++j){
 		if (matrix[i][j] == 1) {
-		  var x = i*cellW;
-		  var y = j*cellH;
+		  var x = positionX + i*cellW;
+		  var y = positionY + j*cellH;
 		  context.fillStyle ='#ff3df0';
 		  context.fillRect(x,y,cellW, cellH);
 
@@ -164,16 +149,22 @@ function draw() {
 
   }
 
+   function Shape (positionX, positionY, cellwidth, cellheight, width, height, matrixPattern){
 
+		this.positionY = posY;
+		this.positionX = posX;
+		this.cellwidth = cellW;
+		this.cellheight =cellH;
+		var matrix  = [];
+		for (var i=0; i<width/cellW;++i){
+			for (var j=0; j<height/cellH;++j){
+		 		matrix[i][j] = matrixPattern[i][j];
+		 	}
+		}
+				this.matix = matrix;
 
-
-
-  })
-
-
-
-
-   
-
- 
+   }
+});
+  //Shape(posX, posY, cellW, cellH, matrixPattern)
+  //var shape = new Shape(0,0,grid.)
 
