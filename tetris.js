@@ -21,7 +21,36 @@ var color = {
 	g:0,
 	b:0
 };
+var patternShapes = [
+  [
+   [1, 1],
+   [1, 1],
+  ], 
+  [
+   [0, 0, 0],
+   [1, 0, 0],
+   [1, 1, 1]
+  ],
 
+  [
+   [1, 1, 1],
+   [0, 1, 0],
+   [0, 0, 0]
+  ],
+
+  [
+   [0, 1, 0],
+   [1, 1, 0],
+   [1, 0, 0]
+  ], 
+
+  [
+   [1, 1, 1, 1],
+   [0, 0, 0, 0],
+   [0, 0, 0, 0],
+   [0, 0, 0, 0]
+  ],
+];
 function rgbToHex(r, g, b) {
 	return "#" + ((1 << 24) + (parseInt(r) << 16) + (parseInt(g) << 8) + parseInt(b)).toString(16).slice(1);
 }
@@ -44,9 +73,8 @@ function init() {
 	  prevTime = curTime = 0;
 
 	grid = new gameGrid(canvas.width, canvas.height, 16, 16);
-	var patternShapes =[ [1, 1,1],[1,1,1],[1,1,1] ];
-  
-	shape = new Shape(0, 8, grid.cellW, grid.cellH,  patternShapes);
+	
+	shape = new Shape(0, 8, grid.cellW, grid.cellH,  patternShapes[2]);
 	//matrix[1][1] = 1;
 	console.log(grid);
 }
