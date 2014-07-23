@@ -155,10 +155,11 @@ function draw() {
 		this.positionX = positionX;
 		this.cellwidth = cellwidth;
 		this.cellheight =cellheight;
-
-		var matrix  = matrixPattern[0].length;
-		for (var i=0; i<matrix;++i){
-			for (var j=0; j<matrix;++j){
+		this.width = width;
+		this.height = height;a
+		var len  = matrixPattern[0].length;
+		for (var i=0; i<len;++i){
+			for (var j=0; j<len;++j){
 		 		matrix[i][j] = matrixPattern[i][j];
 		 	}
 		}
