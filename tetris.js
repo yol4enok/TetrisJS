@@ -156,9 +156,10 @@ function draw() {
 		this.cellwidth = cellwidth;
 		this.cellheight =cellheight;
 		this.width = width;
-		this.height = height;a
+		this.height = height;
 		var len  = matrixPattern[0].length;
 		for (var i=0; i<len;++i){
+			matrix[i]=[];
 			for (var j=0; j<len;++j){
 		 		matrix[i][j] = matrixPattern[i][j];
 		 	}
