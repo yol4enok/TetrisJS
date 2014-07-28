@@ -21,12 +21,10 @@ var color = {
 	g:0,
 	b:0
 };
-var patternShapes = [[0, 0, 0],
-   [0, 1, 0],
-   [1, 1, 1]]
- /* [
-   [1, 1],
-   [1, 1],
+var patternShapes = [
+    [ 
+    [1, 1],
+   [1, 1]
   ], 
   [
    [0, 0, 0],
@@ -62,7 +60,7 @@ var patternShapes = [[0, 0, 0],
    [0, 0, 0, 0],
    [0, 0, 0, 0]
   ],
-];*/
+];
 
 
    function Shape (positionX, positionY, cellwidth, cellheight, matrixPattern){
@@ -91,7 +89,7 @@ var patternShapes = [[0, 0, 0],
      	this.positionY = positionY;
 	}
 
-		Shape.prototype.move = function(positionX, positionY,dx,dy) {
+		Shape.prototype.move = function(dx,dy) {
      	this.positionX += dx;
      	this.positionY +=dy;
 	}
@@ -104,7 +102,7 @@ var patternShapes = [[0, 0, 0],
 
 		
 		for(var i=0; i<len; ++i) {
-			tempmatrix[i] = [];
+			//tempmatrix[i] = [];
 			for (var j=0; j < len; ++j){
 			tempmatrix[len-j-1][i]=this.matrix[i][j];
 		    }
@@ -137,10 +135,10 @@ function init() {
 
 	grid = new gameGrid(canvas.width, canvas.height, 16, 16);
 
-	shape = new Shape(0, 8, grid.cellW, grid.cellH,  patternShapes);
+	shape = new Shape(0, 8, grid.cellW, grid.cellH,  patternShapes[5]);
 	console.log(shape);
-	shape.setPosition(0,3);
-	//shape.rotate(patternShapes);
+	shape.setPosition(0,6);
+	//shape.rotate(patternShapes[5]);
 	//matrix[1][1] = 1;
 	console.log(grid);
 }
@@ -228,6 +226,7 @@ function draw() {
 				matrix[i][j]=0;
 		  }
 		}
+
 		return matrix;
 	}
 
@@ -240,6 +239,19 @@ function draw() {
 		  var y = (positionY + j)*cellH;
 		  context.fillStyle ='#ff3df0';
 		  context.fillRect(x,y,cellW, cellH);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		}
 
