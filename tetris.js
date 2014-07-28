@@ -12,7 +12,7 @@
   
 
 
-var canvas, context, currentX, currentY, grid, matrix,shape;
+var canvas, context, currentX, currentY, grid,shape;
 
 var prevTime;
 var curTime;
@@ -21,8 +21,10 @@ var color = {
 	g:0,
 	b:0
 };
-var patternShapes = [
-  [
+var patternShapes = [[0, 0, 0],
+   [0, 1, 0],
+   [1, 1, 1]]
+ /* [
    [1, 1],
    [1, 1],
   ], 
@@ -60,7 +62,58 @@ var patternShapes = [
    [0, 0, 0, 0],
    [0, 0, 0, 0]
   ],
-];
+];*/
+
+
+   function Shape (positionX, positionY, cellwidth, cellheight, matrixPattern){
+
+		this.positionY = positionY;
+		this.positionX = positionX;
+		this.cellwidth = cellwidth;
+		this.cellheight =cellheight;
+		var len  = matrixPattern[0].length;
+		this.width = len;
+		this.height = len ;
+		var matrix = [];
+		for (var i=0; i<len;++i){
+			matrix[i]=[];
+			for (var j=0; j<len;++j){
+		 		matrix[i][j] = matrixPattern[i][j];
+		 	}
+		}
+		
+		this.matrix = matrix;
+
+   }
+	
+	Shape.prototype.setPosition = function(positionX, positionY) {
+     	this.positionX = positionX;
+     	this.positionY = positionY;
+	}
+
+		Shape.prototype.move = function(positionX, positionY,dx,dy) {
+     	this.positionX += dx;
+     	this.positionY +=dy;
+	}
+	
+	Shape.prototype.rotate = function() {
+     ///повернуть матрицю класа шейп (мембер this.matrix)
+
+		var len = this.matrix[0].length;
+        var tempmatrix = createMatrix(len, len);
+
+		
+		for(var i=0; i<len; ++i) {
+			tempmatrix[i] = [];
+			for (var j=0; j < len; ++j){
+			tempmatrix[len-j-1][i]=this.matrix[i][j];
+		    }
+		}
+
+		this.matrix = tempmatrix;
+
+   	}
+
 function rgbToHex(r, g, b) {
 	return "#" + ((1 << 24) + (parseInt(r) << 16) + (parseInt(g) << 8) + parseInt(b)).toString(16).slice(1);
 }
@@ -84,7 +137,10 @@ function init() {
 
 	grid = new gameGrid(canvas.width, canvas.height, 16, 16);
 
-	shape = new Shape(0, 8, grid.cellW, grid.cellH,  patternShapes[2]);
+	shape = new Shape(0, 8, grid.cellW, grid.cellH,  patternShapes);
+	console.log(shape);
+	shape.setPosition(0,3);
+	//shape.rotate(patternShapes);
 	//matrix[1][1] = 1;
 	console.log(grid);
 }
@@ -160,14 +216,19 @@ function draw() {
 		this.cellH = cellheight;
 		this.gridWidth = canvW/cellwidth;
 		this.gridHeight = canvH/cellheight;
-		matrix=[];
-		for  (var i=0; i<this.gridWidth; ++i){
+		
+		this.matrix = createMatrix(this.gridWidth, this.gridHeight);
+	}
+
+	function createMatrix(n, m) { 
+		var matrix=[];
+		for  (var i=0; i<n; ++i){
 			matrix[i]=[];
-			for (var j=0; j<this.gridHeight; ++j){
+			for (var j=0; j<m; ++j){
 				matrix[i][j]=0;
 		  }
 		}
-		this.matrix = matrix;
+		return matrix;
 	}
 
 
@@ -186,54 +247,6 @@ function draw() {
 	}
 
   }
-
-   function Shape (positionX, positionY, cellwidth, cellheight, matrixPattern){
-
-		this.positionY = positionY;
-		this.positionX = positionX;
-		this.cellwidth = cellwidth;
-		this.cellheight =cellheight;
-		var len  = matrixPattern[0].length;
-		this.width = len;
-		this.height = len ;
-		for (var i=0; i<len;++i){
-			matrix[i]=[];
-			for (var j=0; j<len;++j){
-		 		matrix[i][j] = matrixPattern[i][j];
-		 	}
-		}
-				this.matrix = matrix;
-
-   }
-	
-		Shape.prototype.setPosition = function(positionX, positionY) {
-     	this.positionX = posx;
-     	this.positionY = posy;
-	}
-
-		Shape.prototype.move = function(positionX, positionY) {
-     	this.positionX += dx;
-     	this.positionY +=dy;
-}
-	Shape.prototype.rotate = function() {
-     ///повернуть матрицю класа шейп (мембер this.matrix)
-     var tempmatrix = [];
-
-		var len = this.matrix[0].length;
-		for(var i=0; i<len; ++i) {
-			tempmatrix[i] = [];
-			console.log(tempmatrix[i]);
-			for (var j=0; j < len; ++j){
-			tempmatrix[j][i]=this.matrix[i][j];
-		    }
-		}
-
-		this.matrix = tempmatrix;
-
-   	}
-
-
-
 
 
 });
