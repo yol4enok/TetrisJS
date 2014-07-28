@@ -28,6 +28,11 @@ var patternShapes = [
   ], 
   [
    [0, 0, 0],
+   [0, 0, 1],
+   [1, 1, 1]
+  ],
+  [
+   [0, 0, 0],
    [1, 0, 0],
    [1, 1, 1]
   ],
@@ -42,6 +47,11 @@ var patternShapes = [
    [0, 1, 0],
    [1, 1, 0],
    [1, 0, 0]
+  ], 
+ [
+   [0, 1, 0],
+   [0, 1, 1],
+   [0, 0, 1]
   ], 
 
   [
@@ -73,7 +83,7 @@ function init() {
 	  prevTime = curTime = 0;
 
 	grid = new gameGrid(canvas.width, canvas.height, 16, 16);
-	
+
 	shape = new Shape(0, 8, grid.cellW, grid.cellH,  patternShapes[2]);
 	//matrix[1][1] = 1;
 	console.log(grid);
@@ -195,9 +205,40 @@ function draw() {
 				this.matrix = matrix;
 
    }
+	
+		Shape.prototype.setPosition = function(positionX, positionY) {
+     	this.positionX = posx;
+     	this.positionY = posy;
+	}
+
+		Shape.prototype.move = function(positionX, positionY) {
+     	this.positionX += dx;
+     	this.positionY +=dy;
+}
+	Shape.prototype.rotate = function() {
+     ///повернуть матрицю класа шейп (мембер this.matrix)
+     var tempmatrix = [];
+
+		var len = this.matrix[0].length;
+		for(var i=0; i<len; ++i) {
+			tempmatrix[i] = [];
+			console.log(tempmatrix[i]);
+			for (var j=0; j < len; ++j){
+			tempmatrix[j][i]=this.matrix[i][j];
+		    }
+		}
+
+		this.matrix = tempmatrix;
+
+   	}
+
+
+
+
+
 });
 
-
   
+
   
   
