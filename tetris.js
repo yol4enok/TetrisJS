@@ -155,11 +155,11 @@ function animate() {
 }
 
 function draw() {
-  /*console.log(grid.canvH);
+  //console.log(grid.canvH);
 	curTime = new Date().getTime();
   var dt = curTime - prevTime;
 	if(dt >= 16) {
-	if (currentX < canvas.width - 1) {
+	/*if (currentX < canvas.width - 1) {
 	  currentX++;
 	}
 
@@ -171,12 +171,12 @@ function draw() {
 	color.b += 0.01 * dt;
 	if(color.r > 255) {
 	  color.r = color.g = color.b = 0;
-	}
-	context.fillStyle = rgbToHex(color.r, color.g, color.b);
-	context.fillRect( 0, 0, canvas.width, canvas.height );*/
+	}*/
+	context.fillStyle = 'black';
+	context.fillRect( 0, 0, canvas.width, canvas.height );
 	
 	drawobject(shape.positionX, shape.positionY,shape.width,shape.height,shape.cellwidth, shape.cellheight, shape.matrix);
-	
+	}
 /*    if (currentX === canvas.width - 1 && currentY === canvas.height -1 ) {
 		  currentX = 0;
 		  currentY = 0;
@@ -270,9 +270,9 @@ function handler(event) {
 	  break;
 	}
 }
-window.addEventListener('keydown', handler, false);
+//window.addEventListener('keydown', handler, false);
 window.addEventListener('keypress', handler, false);
-window.addEventListener('keyup', handler, false);
+//window.addEventListener('keyup', handler, false);
 
 });
 
