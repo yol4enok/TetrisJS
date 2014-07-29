@@ -21,6 +21,12 @@ var color = {
 	g:0,
 	b:0
 };
+var KEY_CODE = {
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40
+};
 var patternShapes = [
     [ 
     [1, 1],
@@ -135,10 +141,10 @@ function init() {
 
 	grid = new gameGrid(canvas.width, canvas.height, 16, 16);
 
-	shape = new Shape(0, 8, grid.cellW, grid.cellH,  patternShapes[5]);
+	shape = new Shape(0, 8, grid.cellW, grid.cellH,  patternShapes[2]);
 	console.log(shape);
-	shape.setPosition(0,6);
-	//shape.rotate(patternShapes[5]);
+	//shape.setPosition(0,6);
+	//shape.rotate();
 	//matrix[1][1] = 1;
 	console.log(grid);
 }
@@ -240,26 +246,33 @@ function draw() {
 		  context.fillStyle ='#ff3df0';
 		  context.fillRect(x,y,cellW, cellH);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 		}
 
 	  }
 	}
 
   }
-
+function handler(event) {
+	switch(event.keyCode) {
+	  case KEY_CODE.LEFT:
+	  shape.move(-1,0);
+	      break;
+	  case KEY_CODE.UP:
+	   shape.rotate();
+	  break;
+	  case KEY_CODE.RIGHT:
+	    shape.move(1,0);
+	  break;
+	  case KEY_CODE.DOWN:
+	    shape.move(0,1);
+	  break;
+	  default:
+	  break;
+	}
+}
+window.addEventListener('keydown', handler, false);
+window.addEventListener('keypress', handler, false);
+window.addEventListener('keyup', handler, false);
 
 });
 
