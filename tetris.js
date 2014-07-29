@@ -159,60 +159,13 @@ function draw() {
 	curTime = new Date().getTime();
   var dt = curTime - prevTime;
 	if(dt >= 16) {
-	/*if (currentX < canvas.width - 1) {
-	  currentX++;
-	}
-
-	if (currentY < canvas.height - 1) {
-	  currentY++;
-	}
-	color.r += 0.01 * dt;
-	color.g += 0.01 * dt;
-	color.b += 0.01 * dt;
-	if(color.r > 255) {
-	  color.r = color.g = color.b = 0;
-	}*/
+	
 	context.fillStyle = 'black';
 	context.fillRect( 0, 0, canvas.width, canvas.height );
 	
 	drawobject(shape.positionX, shape.positionY,shape.width,shape.height,shape.cellwidth, shape.cellheight, shape.matrix);
+		}
 	}
-/*    if (currentX === canvas.width - 1 && currentY === canvas.height -1 ) {
-		  currentX = 0;
-		  currentY = 0;
-		  
-		  context.fillStyle = '#000000';
-		  context.fillRect( 0, 0, 255, 255 );
-		} */
-		/*prevTime = curTime;
-	}*/
-
-	/*var time = new Date().getTime() * 0.002;
-	var x = Math.sin( time ) *128;
-	var y = Math.cos( time * 0.9 ) * 96 + 128;*/
-	/*var time = new Date().getTime() * 0.002;
-	var x =0;
-	var y =0;
-	for (var x, x<canvas.width,++x){
-	  for (var y, y<canvas.heigth,++y){
-		  context.fillRect(x,y,x+1,)
-	  }
-
-	}*/
-	/*context.fillStyle = '#000000';
-	context.fillRect( 0, 0, 255, 255 );
-
-
-	context.fillStyle = '#FFFFFF';
-	context.beginPath();
-	context.arc( x, y, 10, 0, Math.PI * 2, true );
-
-	ty
-	context.closePath();
-	context.fill();*/
-
-}
-
 	function gameGrid (canvW,canvH,cellwidth,cellheight){
 		this.canvW = canvW;
 		this.canvH = canvH;
@@ -270,9 +223,7 @@ function handler(event) {
 	  break;
 	}
 }
-//window.addEventListener('keydown', handler, false);
-window.addEventListener('keypress', handler, false);
-//window.addEventListener('keyup', handler, false);
+window.addEventListener('keydown', handler, false);
 
 });
 
