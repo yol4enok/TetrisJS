@@ -12,8 +12,8 @@
   
 
 
-var canvas, context, currentX, currentY, grid,shape;
-
+var canvas, context, currentX, currentY, grid, shape, speed;
+var speed 
 var prevTime;
 var curTime;
 var color = {
@@ -95,10 +95,7 @@ var patternShapes = [
      	this.positionY = positionY;
 	}
 
-		Shape.prototype.move = function(dx,dy) {
-     	this.positionX += dx;
-     	this.positionY +=dy;
-	}
+		
 	
 	Shape.prototype.rotate = function() {
      ///повернуть матрицю класа шейп (мембер this.matrix)
@@ -117,6 +114,11 @@ var patternShapes = [
 		this.matrix = tempmatrix;
 
    	}
+
+   	Shape.prototype.move = function(dx,dy) {
+        this.positionX += dx;
+        this.positionY +=dy;
+	}
 
 function rgbToHex(r, g, b) {
 	return "#" + ((1 << 24) + (parseInt(r) << 16) + (parseInt(g) << 8) + parseInt(b)).toString(16).slice(1);
@@ -141,7 +143,15 @@ function init() {
 
 	grid = new gameGrid(canvas.width, canvas.height, 16, 16);
 
-	shape = new Shape(0, 8, grid.cellW, grid.cellH,  patternShapes[2]);
+	shape = new Shape(0, -10, grid.cellW, grid.cellH,  patternShapes[2]);
+
+	var myTimer = window.setInterval(function(){
+		console.log('timer');
+		update();
+	}, 500);
+
+	//clearTimeout(myTimer);
+
 	console.log(shape);
 	//shape.setPosition(0,6);
 	//shape.rotate();
@@ -205,6 +215,11 @@ function draw() {
 	}
 
   }
+function update() {
+	console.log(shape);
+    shape.move(0,1);
+
+}
 function handler(event) {
 	switch(event.keyCode) {
 	  case KEY_CODE.LEFT:
